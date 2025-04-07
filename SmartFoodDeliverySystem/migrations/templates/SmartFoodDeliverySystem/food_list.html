@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Items</title>
+</head>
+<body>
+    <h1>All Food Items</h1>
+
+    <form method="get">
+        <label for="restaurant">Filter by Restaurant:</label>
+        <select name="restaurant">
+            <option value="">All</option>
+            {% for r in restaurants %}
+                <option value="{{ r.id }}" {% if r.id|stringformat:"s" == request.GET.restaurant %}selected{% endif %}>
+                    {{ r.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    <ul>
+        {% for food in foods %}
+            <li>
+                {{ food.name }} - ₹{{ food.price }} - {{ food.restaurant.name }}
+                [<a href="{% url 'food_update' food.id %}">Edit</a>]
+                [<a href="{% url 'food_delete' food.id %}">Delete</a>]
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

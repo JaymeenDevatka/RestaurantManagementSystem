@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders</title>
+</head>
+<body>
+    <h1>Order List</h1>
+    <ul>
+        {% for order in orders %}
+            <li>
+                Order #{{ order.id }} - {{ order.food_item.name }} - {{ order.customer_name }} - {{ order.status }}
+                [<a href="{% url 'order_status_update' order.id %}">Update Status</a>]
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
